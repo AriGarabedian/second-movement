@@ -105,10 +105,10 @@ static void clock_check_battery_periodically(clock_state_t *state, watch_date_ti
     clock_indicate_low_available_power(state);
 }
 
-static void clock_toggle_time_signal(clock_state_t *state) {
+/*static void clock_toggle_time_signal(clock_state_t *state) {
     state->time_signal_enabled = !state->time_signal_enabled;
     clock_indicate_time_signal(state);
-}
+}*/
 
 static void clock_display_all(watch_date_time_t date_time) {
     char buf[8 + 1];
@@ -252,9 +252,9 @@ bool clock_face_loop(movement_event_t event, void *context) {
             state->date_time.previous = current;
 
             break;
-        case EVENT_ALARM_LONG_PRESS:
+        /*case EVENT_ALARM_LONG_PRESS:
             clock_toggle_time_signal(state);
-            break;
+            break;*/
         case EVENT_BACKGROUND_TASK:
             // uncomment this line to snap back to the clock face when the hour signal sounds:
             // movement_move_to_face(state->watch_face_index);
@@ -275,10 +275,10 @@ movement_watch_face_advisory_t clock_face_advise(void *context) {
     movement_watch_face_advisory_t retval = { 0 };
     clock_state_t *state = (clock_state_t *) context;
 
-    if (state->time_signal_enabled) {
+    /*if (state->time_signal_enabled) {
         watch_date_time_t date_time = movement_get_local_date_time();
         retval.wants_background_task = date_time.unit.minute == 0;
-    }
+    }*/
 
     return retval;
 }
